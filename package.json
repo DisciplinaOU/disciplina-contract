@@ -1,0 +1,7 @@
+{
+  "name": "disciplina-contract",
+  "version": "1.0.0",
+  "description": "Private header validation Solidity contract for Disciplina",
+  "main": "index.js",
+  "license": "MIT"
+}

@@ -3,5 +3,31 @@
   "version": "1.0.0",
   "description": "Private header validation Solidity contract for Disciplina",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "test": "hardhat test",
+    "lint:sol": "solhint -f table **/*.sol"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DisciplinaOU/disciplina-contract.git"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-truffle5": "^2.0.7",
+    "@nomiclabs/hardhat-web3": "^2.0.0",
+    "@remix-project/remixd": "^0.6.13",
+    "cbor": "^8.1.0",
+    "hardhat": "^2.13.0",
+    "hardhat-gas-reporter": "^1.0.9",
+    "solhint": "^3.4.1",
+    "solium": "^1.2.5",
+    "truffle": "^5.8.1",
+    "truffle-assertions": "^0.9.2"
+  },
+  "files": [
+    "contracts"
+  ],
+  "dependencies": {
+    "solidity-cborutils": "^2.0.0"
+  }
 }

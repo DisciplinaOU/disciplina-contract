@@ -1,0 +1,5 @@
+artifacts/*
+contracts/artifacts/*
+cache/*
+node_modules/*
+yarn-error.log

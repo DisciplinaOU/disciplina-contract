@@ -11,6 +11,10 @@ contract Disciplina {
     mapping (address => uint64) public sizes;
 
     event NewHeader(address sender, bytes32 prevHash, bytes32 merkleRoot, uint64 size);
+    
+    function previousHash(address addr) external view returns(bytes32) {
+        return prevHashCur[addr];
+    }
 
     function submitHeader(bytes32 prevHash, bytes32 merkleRoot, uint64 size) external {
         if (prevHashCur[msg.sender] == 0x0) {

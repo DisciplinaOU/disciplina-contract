@@ -1,5 +1,6 @@
 const ethers = require("ethers");
 const axios = require("axios");
+const fs = require("fs/promises");
 
 const BASE_URL = `https://auth.watches.disciplina.io/api`;
 

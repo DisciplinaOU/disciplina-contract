@@ -10,25 +10,20 @@ contract Disciplina {
     mapping (address => bytes32) public merkleRootCur;
     mapping (address => uint64) public sizes;
 
-    event NewChain(address sender, bytes32 genesisHash, bytes32 merkleRoot, uint64 size);
     event NewHeader(address sender, bytes32 prevHash, bytes32 merkleRoot, uint64 size);
 
-    function startChain(bytes32 genesisHash, bytes32 merkleRoot, uint64 size) external {
-        require(prevHashCur[msg.sender] == 0x0, "Chain exists");
-        require(genesisHash == addressHashCBOR(msg.sender), "Wrong genesis hash");
-
-        prevHashCur[msg.sender] = genesisHash;
-        merkleRootCur[msg.sender] = merkleRoot;
-        sizes[msg.sender] = size;
-        emit NewChain(msg.sender, genesisHash, merkleRoot, size);
-    }
-
     function submitHeader(bytes32 prevHash, bytes32 merkleRoot, uint64 size) external {
-        require(
-            prevHash == privateHeaderHash(
-                prevHashCur[msg.sender], merkleRootCur[msg.sender], sizes[msg.sender]),
-            "Wrong hash"
-        );
+        if (prevHashCur[msg.sender] == 0x0) {
+            // new chain
+            require(prevHash == addressHashCBOR(msg.sender), "First header - wrong genesis hash");
+        } else {
+            require(
+                prevHash == privateHeaderHash(
+                    prevHashCur[msg.sender], merkleRootCur[msg.sender], sizes[msg.sender]),
+                "Wrong hash"
+            );
+        }
+        
         prevHashCur[msg.sender] = prevHash;
         merkleRootCur[msg.sender] = merkleRoot;
         sizes[msg.sender] = size;
